@@ -6,14 +6,36 @@ import gonggam from '../assets/images/공감해조.png';
 import ggirriggirri from '../assets/images/끼리끼리.png';
 import mashupbang from '../assets/images/매시업방위대.png';
 import branding from '../assets/images/브랜딩팀.png';
+import removedBranding from '../assets/images/removed-브랜딩팀.png';
 import jungsin from '../assets/images/정신머리.png';
 import hMM from '../assets/images/HMM.png';
 import ladder from '../assets/images/Ladder.png';
 
 const Container = styled.div`
-  height: 100vh;
+  display: flex;
   background-color: #000;
   border: 1px solid transparent;
+`;
+
+const DeletedItemContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const RemovedTeam = styled.img`
+  @keyframes down {
+    from {
+      transform: translateY(-2000px);
+    }
+    to {
+      transform: translateY(0px);
+    }
+  }
+
+  width: 275px;
+  height: 110px;
+  border: 2px solid black;
+  animation: down 1s ease-in;
 `;
 
 const Scene = styled.div`
@@ -73,52 +95,88 @@ const Scene = styled.div`
   }
 `;
 
+interface CarouselItem {
+  teamName: string;
+  src: string;
+  removedSrc: string;
+  isRemoving: boolean;
+}
+
 function Carousel() {
-  const [carousel, setCarousel] = useState([
-    affa,
-    sixtwosevenone,
-    gonggam,
-    ggirriggirri,
-    mashupbang,
-    branding,
-    jungsin,
-    hMM,
-    ladder,
+  const [carousel, setCarousel] = useState<CarouselItem[]>([
+    { teamName: 'affa', src: affa, isRemoving: false, removedSrc: removedBranding },
+    {
+      teamName: 'sixtwosevenone',
+      src: sixtwosevenone,
+      isRemoving: false,
+      removedSrc: removedBranding,
+    },
+    { teamName: 'gonggam', src: gonggam, isRemoving: false, removedSrc: removedBranding },
+    { teamName: 'ggirriggirri', src: ggirriggirri, isRemoving: false, removedSrc: removedBranding },
+    { teamName: 'mashupbang', src: mashupbang, isRemoving: false, removedSrc: removedBranding },
+    { teamName: 'branding', src: branding, isRemoving: false, removedSrc: removedBranding },
+    { teamName: 'jungsin', src: jungsin, isRemoving: false, removedSrc: removedBranding },
+    { teamName: 'hMM', src: hMM, isRemoving: false, removedSrc: removedBranding },
+    { teamName: 'ladder', src: ladder, isRemoving: false, removedSrc: removedBranding },
   ]);
+
+  const [removedItems, setRemovedItems] = useState<CarouselItem[]>([]);
+
   const randomIndex = Math.floor(Math.random() * carousel.length);
 
   const handleRandomRemoveCarousel = () => {
     const removeItem = carousel.find((_, index) => index === randomIndex);
-    setCarousel(pre => pre.filter((_, index) => index !== randomIndex));
+    if (!removeItem) return;
 
-    console.log(removeItem);
+    setCarousel(pre =>
+      pre.map((carouselItem, index) =>
+        index === randomIndex ? { ...carouselItem, isRemoving: true } : carouselItem
+      )
+    );
+    setTimeout(() => setCarousel(pre => pre.filter((_, index) => index !== randomIndex)), 500);
+
+    setRemovedItems(pre => [...pre, removeItem]);
   };
   return (
-    <Container>
-      <Scene>
-        <div className="carousel__wrapper">
-          <div className="carousel">
-            {carousel.map((src, index) => {
-              const rotateY = (360 / carousel.length) * index;
-              const translateZ = Math.round((180 * 1.2) / 2 / Math.tan(Math.PI / carousel.length));
-
-              return (
-                <img
-                  src={src}
-                  alt=""
-                  className="carousel__cell"
-                  style={{ transform: `rotateY(${rotateY}deg) translateZ(${translateZ || 180}px)` }}
-                  key={`item-${index}`}
-                />
-              );
-            })}
+    <>
+      <Container>
+        <div>
+          <div>
+            <button onClick={handleRandomRemoveCarousel}>뽑기</button>
           </div>
         </div>
-      </Scene>
-      <div>
-        <button onClick={handleRandomRemoveCarousel}>뽑기</button>
-      </div>
-    </Container>
+        <Scene>
+          <div className="carousel__wrapper">
+            <div className="carousel">
+              {carousel.map(({ teamName, src, isRemoving }, index) => {
+                const rotateY = (360 / carousel.length) * index;
+                const translateZ = Math.round(
+                  (180 * 1.35) / 2 / Math.tan(Math.PI / carousel.length)
+                );
+                return (
+                  <img
+                    src={src}
+                    alt=""
+                    className="carousel__cell"
+                    style={{
+                      transform: `rotateY(${rotateY}deg) translateZ(${
+                        translateZ > 0 ? translateZ : 100
+                      }px) ${isRemoving ? 'translateY(-1000px)' : ''}`,
+                    }}
+                    key={`item-${teamName}`}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </Scene>
+        <DeletedItemContainer>
+          {removedItems.map(({ teamName, removedSrc }) => {
+            return <RemovedTeam src={removedSrc} alt="" key={`item-${teamName}`} />;
+          })}
+        </DeletedItemContainer>
+      </Container>
+    </>
   );
 }
 
