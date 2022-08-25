@@ -1,32 +1,40 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import affa from '../assets/images/에프파.png';
-import sixtwosevenone from '../assets/images/6271.png';
+import six271 from '../assets/images/6271.png';
 import gonggam from '../assets/images/공감해조.png';
 import ggirriggirri from '../assets/images/끼리끼리.png';
 import mashupbang from '../assets/images/매시업방위대.png';
 import branding from '../assets/images/브랜딩팀.png';
-import removedBranding from '../assets/images/removed-브랜딩팀.png';
 import jungsin from '../assets/images/정신머리.png';
 import hMM from '../assets/images/HMM.png';
 import ladder from '../assets/images/Ladder.png';
+import affaRemoved from '../assets/images/에프파-removed.png';
+import six271Removed from '../assets/images/6271-removed.png';
+import gonggamRemoved from '../assets/images/공감해조-removed.png';
+import ggirriggirriRemoved from '../assets/images/끼리끼리-removed.png';
+import mashupbangRemoved from '../assets/images/매시업방위대-removed.png';
+import brandingRemoved from '../assets/images/브랜딩팀-removed.png';
+import jungsinRemoved from '../assets/images/정신머리-removed.png';
+import hMMRemoved from '../assets/images/HMM-removed.png';
+import ladderRemoved from '../assets/images/Ladder-removed.png';
 import { css } from '@emotion/react';
 
 const carouselArr = [
-  { teamName: 'affa', src: affa, isRemoving: false, removedSrc: removedBranding },
+  { teamName: 'affa', src: affa, isRemoving: false, removedSrc: affaRemoved },
+  { teamName: '6271', src: six271, isRemoving: false, removedSrc: six271Removed },
+  { teamName: 'gonggam', src: gonggam, isRemoving: false, removedSrc: gonggamRemoved },
   {
-    teamName: 'sixtwosevenone',
-    src: sixtwosevenone,
+    teamName: 'ggirriggirri',
+    src: ggirriggirri,
     isRemoving: false,
-    removedSrc: removedBranding,
+    removedSrc: ggirriggirriRemoved,
   },
-  { teamName: 'gonggam', src: gonggam, isRemoving: false, removedSrc: removedBranding },
-  { teamName: 'ggirriggirri', src: ggirriggirri, isRemoving: false, removedSrc: removedBranding },
-  { teamName: 'mashupbang', src: mashupbang, isRemoving: false, removedSrc: removedBranding },
-  { teamName: 'branding', src: branding, isRemoving: false, removedSrc: removedBranding },
-  { teamName: 'jungsin', src: jungsin, isRemoving: false, removedSrc: removedBranding },
-  { teamName: 'hMM', src: hMM, isRemoving: false, removedSrc: removedBranding },
-  { teamName: 'ladder', src: ladder, isRemoving: false, removedSrc: removedBranding },
+  { teamName: 'mashupbang', src: mashupbang, isRemoving: false, removedSrc: mashupbangRemoved },
+  { teamName: 'branding', src: branding, isRemoving: false, removedSrc: brandingRemoved },
+  { teamName: 'jungsin', src: jungsin, isRemoving: false, removedSrc: jungsinRemoved },
+  { teamName: 'hMM', src: hMM, isRemoving: false, removedSrc: hMMRemoved },
+  { teamName: 'ladder', src: ladder, isRemoving: false, removedSrc: ladderRemoved },
 ];
 
 const Container = styled.div`
