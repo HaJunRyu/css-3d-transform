@@ -231,7 +231,7 @@ function Carousel() {
         <Scene
           randomIndex={randomIndex}
           carouselLength={carousel.length}
-          rotateYDeg={removeItemRotateYDeg || 360}
+          rotateYDeg={removeItemRotateYDeg || 360 * 10}
           isRemoving={isRemoving}
         >
           <div className="carousel__wrapper">
