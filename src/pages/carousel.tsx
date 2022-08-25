@@ -46,6 +46,7 @@ const Container = styled.div`
 const DeletedItemContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
+  width: 279px;
 `;
 
 const RemovedTeam = styled.img`
@@ -153,6 +154,38 @@ const CarouselCell = styled.img<{ isRemoving: boolean; rotateY: number; translat
   `}
 `;
 
+const PickButton = styled.button`
+  position: absolute;
+  top: 480px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  background: #6244ff;
+  color: #fff;
+  padding: 16px;
+  border: 0;
+  border-radius: 16px;
+  width: 120px;
+  height: 62px;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #4127d1;
+  }
+
+  &:active {
+    width: 115px;
+    height: 60px;
+  }
+
+  &:disabled {
+    background-color: #c2b6ff;
+    cursor: not-allowed;
+  }
+`;
+
 interface CarouselItem {
   teamName: string;
   src: string;
@@ -194,11 +227,6 @@ function Carousel() {
   return (
     <>
       <Container>
-        <div>
-          <div>
-            <button onClick={handleRandomRemoveCarousel}>뽑기</button>
-          </div>
-        </div>
         <Scene
           randomIndex={randomIndex}
           carouselLength={carousel.length}
@@ -230,6 +258,9 @@ function Carousel() {
               })}
             </div>
           </div>
+          <PickButton onClick={handleRandomRemoveCarousel} disabled={isRemoving}>
+            뽑기
+          </PickButton>
         </Scene>
         <DeletedItemContainer>
           {removedItems.map(({ teamName, removedSrc }) => {
