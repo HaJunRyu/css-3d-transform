@@ -222,7 +222,7 @@ function Carousel() {
     setRemovedItems(pre => [...pre, removeItem]);
   };
 
-  const removeItemRotateYDeg = (360 / carousel.length) * randomIndex * (carousel.length + 1);
+  const removeItemRotateYDeg = (360 / carousel.length) * randomIndex * (carousel.length * 3 + 1);
 
   return (
     <>
