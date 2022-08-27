@@ -42,6 +42,7 @@ const Container = styled.div`
   background-color: #000;
   height: 100vh;
   border: 1px solid transparent;
+  user-select: none;
 `;
 
 const DeletedItemContainer = styled.div`
