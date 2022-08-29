@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import affa from '../assets/images/에프파.png';
 import six271 from '../assets/images/6271.png';
 import gonggam from '../assets/images/공감해조.png';
@@ -73,7 +73,7 @@ const Scene = styled.div<{
   isRemoving: boolean;
   rotateYDeg: number;
 }>`
-  ${({ randomIndex, carouselLength, isRemoving, rotateYDeg }) => css`
+  ${({ isRemoving, rotateYDeg }) => css`
     @keyframes carouselRender {
       0% {
         transform: translateZ(-1000px);
